@@ -40,20 +40,19 @@ func login(username string, userpwd string) (err error) {
 	}
 
 	//将message的长度转换成一个可以表示长度的byte切片
-	//将message的长度转换成一个可以表示长度的byte切片
 	var pkgLen uint32
 	pkgLen = uint32(len(data))
-	var bytes [4]byte
+	var buf [4]byte
 
-	binary.BigEndian.PutUint32(bytes[0:4], pkgLen)
+	binary.BigEndian.PutUint32(buf[0:4], pkgLen)
 
-	n, err := conn.Write(bytes[:4])
+	n, err := conn.Write(buf[:4])
 	if err != nil || n != 4 {
 		fmt.Println("conn.Write(bytes) faild!", err)
 		return
 	}
 
-	fmt.Println("发送数据长度成功！！！")
+	fmt.Printf("客户端发送数据长度=%d 内容=%s", pkgLen,string(data))
 
 	return nil
 }
