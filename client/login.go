@@ -46,7 +46,7 @@ func login(username string, userpwd string) (err error) {
 
 	binary.BigEndian.PutUint32(bytes[0:4], pkgLen)
 
-	n, err := conn.Write(bytes)
+	n, err := conn.Write(bytes[:4])
 	if err != nil || n != 4 {
 		fmt.Println("conn.Write(bytes) faild!", err)
 		return
