@@ -40,6 +40,7 @@ func login(username string, userpwd string) (err error) {
 	}
 
 	//将message的长度转换成一个可以表示长度的byte切片
+	//将message的长度转换成一个可以表示长度的byte切片
 	var pkgLen uint32
 	pkgLen = uint32(len(data))
 	var bytes [4]byte
