@@ -54,6 +54,8 @@ func login(username string, userpwd string) (err error) {
 
 	//验证commit，merge
 	fmt.Printf("客户端发送数据长度=%d 内容=%s", pkgLen, string(data))
+	
+	//tao
 
 	return nil
 }
