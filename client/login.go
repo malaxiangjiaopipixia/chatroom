@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net"
+	"time"
 )
 
 func login(username string, userpwd string) (err error) {
@@ -53,9 +54,16 @@ func login(username string, userpwd string) (err error) {
 	}
 
 	//验证commit，merge
-	fmt.Printf("客户端发送数据长度=%d 内容=%s", pkgLen, string(data))
-	
-	//tao
+	//fmt.Printf("客户端发送数据长度=%d 内容=%s", pkgLen, string(data))
 
-	return nil
+	//发送消息本身
+	_, err = conn.Write(data)
+	if err != nil {
+		fmt.Println("conn.Write(data) err=", err)
+		return
+	}
+
+	time.Sleep(20 * time.Second)
+
+	return
 }
