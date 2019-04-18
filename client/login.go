@@ -52,6 +52,7 @@ func login(username string, userpwd string) (err error) {
 		return
 	}
 
+	//我tmd很气
 	fmt.Printf("客户端发送数据长度=%d 内容=%s", pkgLen, string(data))
 	fmt.Printf("客户端发送数据长度=%d 内容=%s", pkgLen, string(data))
 	fmt.Printf("客户端发送数据长度=%d 内容=%s", pkgLen, string(data))
