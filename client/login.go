@@ -4,6 +4,7 @@ import (
 	"chatroom/common/message"
 	"encoding/binary"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net"
 )
@@ -52,9 +53,29 @@ func login(username string, userpwd string) (err error) {
 		return
 	}
 
-	//验证commit，merge
-	fmt.Printf("客户端发送数据长度=%d 内容=%s", pkgLen, string(data))
-	//aa
+	//发送消息本身
+	_, err = conn.Write(data)
+	if err != nil {
+		fmt.Println("conn.Write(data) err=", err)
+		return
+	}
 
-	return nil
+	//time.Sleep(20 * time.Second)
+	//处理服务器返回消息
+	mes, err = readPkg(conn)
+	if err != nil {
+		return
+	}
+
+	var loginResMes message.LoginResMes
+	err = json.Unmarshal([]byte(mes.Data), &loginResMes)
+	//fmt.Println("loginResMes=", loginResMes)
+	if loginResMes.Code == 200 {
+		fmt.Println("登陆成功！！！")
+	} else if loginResMes.Code == 500 {
+		fmt.Println("登陆失败！！！")
+		return errors.New(loginResMes.Error)
+	}
+
+	return
 }
