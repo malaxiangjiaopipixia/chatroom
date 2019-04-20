@@ -27,6 +27,7 @@ func (this *Processor) serverPeocessMes(mes *message.Message) (err error) {
 		}
 		return
 	case message.RegisterMesType:
+
 		//处理注册函数
 
 	default:
